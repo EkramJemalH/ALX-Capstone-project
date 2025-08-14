@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import generalKnowledgeImg from "../assets/general_knowledge.png";
 import scienceAndNatureImg from "../assets/science_and_nature.jpg";
@@ -8,15 +8,28 @@ import historyImg from "../assets/history.png"; // make sure this file exists
 
 export default function CategorySelect() {
   const navigate = useNavigate();
+  const [selectedDifficulty, setSelectedDifficulty] = useState({});
 
-const categories = [
-  { id: 1, name: "General Knowledge", description: "Fun facts, common knowledge, and everyday trivia.", img: generalKnowledgeImg },
-  {id: 2, name: "History", description: "Questions about historical events, figures, and timelines.", img: historyImg },
-  { id: 3, name: "Geography", description: "Questions about countries, capitals, landmarks, and maps.", img: geographyImg },
-  { id: 4, name: "Science and Nature", description: "Covers biology, chemistry, physics, space, and natural phenomena.", img: scienceAndNatureImg },
-  { id: 5, name: "Entertainment: Film", description: "Movie trivia from classics to modern films.", img: entertainmentImg },
-];
+  const categories = [
+    { id: 1, name: "General Knowledge", description: "Fun facts, common knowledge, and everyday trivia.", img: generalKnowledgeImg },
+    { id: 2, name: "History", description: "Questions about historical events, figures, and timelines.", img: historyImg },
+    { id: 3, name: "Geography", description: "Questions about countries, capitals, landmarks, and maps.", img: geographyImg },
+    { id: 4, name: "Science and Nature", description: "Covers biology, chemistry, physics, space, and natural phenomena.", img: scienceAndNatureImg },
+    { id: 5, name: "Entertainment: Film", description: "Movie trivia from classics to modern films.", img: entertainmentImg },
+  ];
 
+  const handleDifficultyChange = (categoryId, value) => {
+    setSelectedDifficulty(prev => ({ ...prev, [categoryId]: value }));
+  };
+
+  const startQuiz = (categoryId) => {
+    const difficulty = selectedDifficulty[categoryId];
+    if (!difficulty) {
+      alert("Please select a difficulty level first!");
+      return;
+    }
+    navigate("/quiz", { state: { categoryId, difficulty } });
+  };
 
   const styles = {
     container: {
@@ -42,7 +55,7 @@ const categories = [
       flexDirection: "column",
       alignItems: "center",
       gap: "2rem",
-      backgroundColor:"#76A541",
+      backgroundColor: "#76A541",
     },
     heading: {
       fontSize: "2.5rem",
@@ -50,53 +63,65 @@ const categories = [
       marginBottom: "2rem",
       color: "#ffffff",
       fontFamily: "'Ribeye', serif",
-  fontStyle: "normal",
+      fontStyle: "normal",
     },
     categoryGrid: {
-  display: "grid",
-  gridTemplateColumns: "repeat(3,1fr))",
-  gap: "2rem",
-  justifyContent: "center", // centers the whole grid
-  justifyItems: "center",
-  width: "100%",
-  maxWidth: "1000px",
-},
-
+      display: "grid",
+      gridTemplateColumns: "repeat(3, 1fr)",
+      gap: "2rem",
+      justifyContent: "center",
+      justifyItems: "center",
+      width: "100%",
+      maxWidth: "1000px",
+    },
     categoryCard: {
       backgroundColor: "#76A541",
       borderRadius: "8px",
       padding: "1rem",
       width: "220px",
-      height:"350px",
+      height: "350px",
       boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
       textAlign: "center",
-      border:"1px solid #FDF140",
+      border: "1px solid #FDF140",
       display: "flex",
-  flexDirection: "column",
+      flexDirection: "column",
+      justifyContent: "space-between",
     },
     categoryImg: {
       width: "100%",
       height: "120px",
       objectFit: "cover",
       borderRadius: "6px",
-      marginBottom: "2.5rem",
+      marginBottom: "1rem",
     },
     categoryName: {
       fontSize: "1.2rem",
-      marginBottom: "0.9rem",
-      textAlign:"center",
+      marginBottom: "0.5rem",
+      textAlign: "center",
+      fontWeight: "700",
     },
     categoryDescription: {
       fontSize: "0.9rem",
-      marginBottom: "0.9rem",
+      marginBottom: "0.5rem",
     },
     select: {
       width: "100%",
       padding: "0.4rem",
       fontSize: "0.9rem",
-      backgroundColor:"#e7e4e4ff",
-      color:"#000000",
-      fontWeight:"800",
+      backgroundColor: "#e7e4e4ff",
+      color: "#000000",
+      fontWeight: "800",
+    },
+    startBtn: {
+      marginTop: "0.5rem",
+      padding: "0.4rem 0.6rem",
+      backgroundColor: "#034527",
+      border: "none",
+      borderRadius: "4px",
+      cursor: "pointer",
+      fontWeight: "700",
+      fontFamily: "'Ribeye', serif",
+  fontStyle: "normal",
     },
   };
 
@@ -110,25 +135,33 @@ const categories = [
         <div style={styles.categoryGrid}>
           {categories.map((cat) => (
             <div
-    key={cat.id}
-    style={{
-      ...styles.categoryCard,
-      gridColumn:
-        cat.id <= 3
-          ? cat.id // first row: 1,2,3
-          : cat.id === 4
-          ? 1 // second row left
-          : 3, // second row right
-    }}
-  >
+              key={cat.id}
+              style={{
+                ...styles.categoryCard,
+                gridColumn:
+                  cat.id <= 3
+                    ? undefined // top row uses default columns
+                    : cat.id === 4
+                    ? 1 // bottom row left-center
+                    : 3, // bottom row right-center
+              }}
+            >
               <img src={cat.img} alt={cat.name} style={styles.categoryImg} />
               <div style={styles.categoryName}>{cat.name}</div>
               <div style={styles.categoryDescription}>{cat.description}</div>
-              <select style={styles.select}>
+              <select
+                style={styles.select}
+                value={selectedDifficulty[cat.id] || ""}
+                onChange={(e) => handleDifficultyChange(cat.id, e.target.value)}
+              >
+                <option value="">Difficulty level</option>
                 <option value="easy">Easy</option>
                 <option value="medium">Medium</option>
                 <option value="hard">Hard</option>
               </select>
+              <button style={styles.startBtn} onClick={() => startQuiz(cat.id)}>
+                Start
+              </button>
             </div>
           ))}
         </div>
