@@ -92,9 +92,9 @@ export default function Home() {
     <div style={styles.container}>
       <header className="home-header" style={styles.header}>Quizzy</header>
 
-      <main style={styles.main}>
-        <div style={styles.left}>
-          <h1 className="home-header" style={styles.heading}>Welcome to Quizzy</h1>
+      <main className="home-main" style={styles.main}>
+        <div className="home-left" style={styles.left}>
+          <h1 className="home-heading" style={styles.heading}>Welcome to Quizzy</h1>
           <p className="home-p" style={styles.paragraph}>
             Test your knowledge across different topics with Quizzy .
 Whether you're learning something new or just want to challenge yourself, each question helps you sharpen your mind .
@@ -107,7 +107,7 @@ one click at a time!
           </button>
         </div>
 
-        <div style={styles.right}>
+        <div className="home-right" style={styles.right}>
           <div className="home-question" style={styles.questionMark}>?</div>
         </div>
       </main>

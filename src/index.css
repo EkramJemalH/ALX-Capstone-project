@@ -71,6 +71,9 @@ button:focus-visible {
 .home-header {
   font-family: 'Protest Revolution', sans-serif;
 }
+.home-heading{
+  font-family: 'Protest Revolution', sans-serif;
+}
 .home-p{
   font-family: "Ribeye", serif;
   font-weight: 400;
@@ -81,3 +84,71 @@ button:focus-visible {
   font-weight: 400;
   font-style: normal;
  }
+
+@media (max-width: 1024px) {
+  /* Tablet */
+  .home-main {
+    flex-direction: column;
+    padding: 3rem 2rem;
+  }
+
+  .home-main .home-left,
+  .home-main .home-right {
+    flex: unset;
+    width: 100%;
+    padding: 0;
+    margin-bottom: 2rem;
+  }
+
+  .home-heading {
+    font-size: 2.5rem;
+  }
+
+  .home-p {
+    font-size: 1rem;
+  }
+
+  .home-question {
+    font-size: 15rem;
+  }
+
+  .home-header {
+    font-size: 1.3rem;
+    padding: 0.8rem 1.5rem;
+  }
+
+  button {
+    padding: 0.6rem 1.5rem;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Mobile */
+  .home-main {
+    flex-direction: column;
+    padding: 2rem 1rem;
+  }
+
+  .home-heading {
+    font-size: 2rem;
+  }
+
+  .home-p {
+    font-size: 0.95rem;
+  }
+
+  .home-question {
+    font-size: 10rem;
+  }
+
+  .home-header {
+    font-size: 1.2rem;
+    padding: 0.7rem 1rem;
+  }
+
+  button {
+    padding: 0.5rem 1.2rem;
+    font-size: 0.9rem;
+  }
+}
