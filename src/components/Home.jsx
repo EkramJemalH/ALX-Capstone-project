@@ -1,28 +1,35 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-
 export default function Home() {
   const navigate = useNavigate();
 
   const styles = {
     container: {
       minHeight: "100vh",
+      width:"100%",
+      margin:0,
+      padding:0,
       display: "flex",
       flexDirection: "column",
       fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
     },
     header: {
-      backgroundColor: "#2563eb",
+      backgroundColor: "#76A541",
+      borderBottom:"2px solid #FDF140",
       color: "white",
-      textAlign: "center",
+      textAlign: "left",
       padding: "1rem",
+      paddingLeft:"2rem",
       fontSize: "1.5rem",
-      fontWeight: "bold",
+      fontWeight: "400",
+      fontFamily: "'Protest Revolution', sans-serif",
+      fontStyle: "normal",
     },
     main: {
       flex: 1,
       display: "flex",
       padding: "4rem 5rem",
+      backgroundColor:"#76A541",
     },
     left: {
       flex: 1,
@@ -37,7 +44,7 @@ export default function Home() {
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
-      color: "#9ca3af",
+      color: "#ffffff",
       textAlign: "center",
       userSelect: "none",
     },
@@ -48,11 +55,11 @@ export default function Home() {
     },
     paragraph: {
       fontSize: "1.125rem",
-      color: "#374151",
+      color: "#ffffff",
     },
     button: {
       marginTop: "2.5rem",
-      backgroundColor: "#2563eb",
+      backgroundColor: "#034527",
       color: "white",
       border: "none",
       padding: "0.75rem 2rem",
@@ -60,11 +67,16 @@ export default function Home() {
       fontWeight: "600",
       borderRadius: "0.375rem",
       cursor: "pointer",
+      fontFamily: "'Ribeye', serif",
+  fontWeight: "400",
+  fontStyle: "normal",
     },
     questionMark: {
-      fontSize: "9rem",
+      fontSize: "32rem",
       fontWeight: "900",
       lineHeight: "1",
+     color: "#034527",
+  textShadow: "6px 6px 0 #FDF140", 
     },
     label: {
       marginTop: "1rem",
@@ -78,22 +90,25 @@ export default function Home() {
 
   return (
     <div style={styles.container}>
-      <header style={styles.header}>Quizzy</header>
+      <header className="home-header" style={styles.header}>Quizzy</header>
 
       <main style={styles.main}>
         <div style={styles.left}>
-          <h1 style={styles.heading}>Welcome to Quizzy!</h1>
-          <p style={styles.paragraph}>
-            Challenge yourself with fun quizzes on various topics. Test your knowledge and learn new facts!
+          <h1 className="home-header" style={styles.heading}>Welcome to Quizzy</h1>
+          <p className="home-p" style={styles.paragraph}>
+            Test your knowledge across different topics with Quizzy .
+Whether you're learning something new or just want to challenge yourself, each question helps you sharpen your mind .
+<br></br>
+one click at a time!
+
           </p>
           <button style={styles.button} onClick={handleStart}>
-            Start
+            Begin Quiz
           </button>
         </div>
 
         <div style={styles.right}>
-          <div style={styles.questionMark}>?</div>
-          <div style={styles.label}>Question Mark</div>
+          <div className="home-question" style={styles.questionMark}>?</div>
         </div>
       </main>
     </div>

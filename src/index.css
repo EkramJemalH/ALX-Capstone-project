@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Ribeye&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Protest+Revolution&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Peralta&display=swap');
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -24,8 +28,6 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -66,3 +68,16 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+.home-header {
+  font-family: 'Protest Revolution', sans-serif;
+}
+.home-p{
+  font-family: "Ribeye", serif;
+  font-weight: 400;
+  font-style: normal;
+ }
+ .home-question{
+  font-family: "Peralta", serif;
+  font-weight: 400;
+  font-style: normal;
+ }
