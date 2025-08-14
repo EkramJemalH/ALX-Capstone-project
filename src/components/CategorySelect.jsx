@@ -4,7 +4,7 @@ import generalKnowledgeImg from "../assets/general_knowledge.png";
 import scienceAndNatureImg from "../assets/science_and_nature.jpg";
 import geographyImg from "../assets/geography.png";
 import entertainmentImg from "../assets/entertainment.jpg";
-import historyImg from "../assets/history.png"; // make sure this file exists
+import historyImg from "../assets/history.png";
 
 export default function CategorySelect() {
   const navigate = useNavigate();
@@ -50,7 +50,7 @@ export default function CategorySelect() {
     },
     main: {
       flex: 1,
-      padding: "2rem 5rem",
+      padding: "2rem 2rem",
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
@@ -64,22 +64,24 @@ export default function CategorySelect() {
       color: "#ffffff",
       fontFamily: "'Ribeye', serif",
       fontStyle: "normal",
+      textAlign: "center",
     },
     categoryGrid: {
       display: "grid",
-      gridTemplateColumns: "repeat(3, 1fr)",
-      gap: "2rem",
-      justifyContent: "center",
-      justifyItems: "center",
       width: "100%",
       maxWidth: "1000px",
+      gap: "2rem",
+      gridTemplateColumns: "repeat(3, 1fr)",
+      gridTemplateRows: "auto auto",
+      justifyItems: "center",
     },
     categoryCard: {
       backgroundColor: "#76A541",
       borderRadius: "8px",
       padding: "1rem",
-      width: "220px",
-      height: "350px",
+      width: "100%",
+      maxWidth: "220px",
+      height: "auto",
       boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
       textAlign: "center",
       border: "1px solid #FDF140",
@@ -121,7 +123,7 @@ export default function CategorySelect() {
       cursor: "pointer",
       fontWeight: "700",
       fontFamily: "'Ribeye', serif",
-  fontStyle: "normal",
+      fontStyle: "normal",
     },
   };
 
@@ -133,37 +135,34 @@ export default function CategorySelect() {
         <h1 style={styles.heading}>Quiz Categories</h1>
 
         <div style={styles.categoryGrid}>
-          {categories.map((cat) => (
-            <div
-              key={cat.id}
-              style={{
-                ...styles.categoryCard,
-                gridColumn:
-                  cat.id <= 3
-                    ? undefined // top row uses default columns
-                    : cat.id === 4
-                    ? 1 // bottom row left-center
-                    : 3, // bottom row right-center
-              }}
-            >
-              <img src={cat.img} alt={cat.name} style={styles.categoryImg} />
-              <div style={styles.categoryName}>{cat.name}</div>
-              <div style={styles.categoryDescription}>{cat.description}</div>
-              <select
-                style={styles.select}
-                value={selectedDifficulty[cat.id] || ""}
-                onChange={(e) => handleDifficultyChange(cat.id, e.target.value)}
-              >
-                <option value="">Difficulty level</option>
-                <option value="easy">Easy</option>
-                <option value="medium">Medium</option>
-                <option value="hard">Hard</option>
-              </select>
-              <button style={styles.startBtn} onClick={() => startQuiz(cat.id)}>
-                Start
-              </button>
-            </div>
-          ))}
+          {categories.map((cat, index) => {
+            // Determine grid position for second row
+            let gridColumn = undefined;
+            if (index >= 3) {
+              gridColumn = index === 3 ? 1 : 3; // left-center and right-center
+            }
+
+            return (
+              <div key={cat.id} style={{ ...styles.categoryCard, gridColumn }}>
+                <img src={cat.img} alt={cat.name} style={styles.categoryImg} />
+                <div style={styles.categoryName}>{cat.name}</div>
+                <div style={styles.categoryDescription}>{cat.description}</div>
+                <select
+                  style={styles.select}
+                  value={selectedDifficulty[cat.id] || ""}
+                  onChange={(e) => handleDifficultyChange(cat.id, e.target.value)}
+                >
+                  <option value="">Difficulty level</option>
+                  <option value="easy">Easy</option>
+                  <option value="medium">Medium</option>
+                  <option value="hard">Hard</option>
+                </select>
+                <button style={styles.startBtn} onClick={() => startQuiz(cat.id)}>
+                  Start
+                </button>
+              </div>
+            );
+          })}
         </div>
       </main>
     </div>
