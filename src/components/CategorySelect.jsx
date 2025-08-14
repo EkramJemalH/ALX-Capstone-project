@@ -11,9 +11,9 @@ export default function CategorySelect() {
 
 const categories = [
   { id: 1, name: "General Knowledge", description: "Fun facts, common knowledge, and everyday trivia.", img: generalKnowledgeImg },
-  { id: 2, name: "Science and Nature", description: "Covers biology, chemistry, physics, space, and natural phenomena.", img: scienceAndNatureImg },
-  { id: 3, name: "History", description: "Questions about historical events, figures, and timelines.", img: historyImg },
-  { id: 4, name: "Geography", description: "Questions about countries, capitals, landmarks, and maps.", img: geographyImg },
+  {id: 2, name: "History", description: "Questions about historical events, figures, and timelines.", img: historyImg },
+  { id: 3, name: "Geography", description: "Questions about countries, capitals, landmarks, and maps.", img: geographyImg },
+  { id: 4, name: "Science and Nature", description: "Covers biology, chemistry, physics, space, and natural phenomena.", img: scienceAndNatureImg },
   { id: 5, name: "Entertainment: Film", description: "Movie trivia from classics to modern films.", img: entertainmentImg },
 ];
 
@@ -53,13 +53,15 @@ const categories = [
   fontStyle: "normal",
     },
     categoryGrid: {
-      display: "grid",
-      gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-      gap: "2rem",
-      justifyItems: "center",
-      width: "100%",
-      maxWidth: "1000px",
-    },
+  display: "grid",
+  gridTemplateColumns: "repeat(3,1fr))",
+  gap: "2rem",
+  justifyContent: "center", // centers the whole grid
+  justifyItems: "center",
+  width: "100%",
+  maxWidth: "1000px",
+},
+
     categoryCard: {
       backgroundColor: "#76A541",
       borderRadius: "8px",
@@ -69,6 +71,8 @@ const categories = [
       boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
       textAlign: "center",
       border:"1px solid #FDF140",
+      display: "flex",
+  flexDirection: "column",
     },
     categoryImg: {
       width: "100%",
@@ -105,7 +109,18 @@ const categories = [
 
         <div style={styles.categoryGrid}>
           {categories.map((cat) => (
-            <div key={cat.id} style={styles.categoryCard}>
+            <div
+    key={cat.id}
+    style={{
+      ...styles.categoryCard,
+      gridColumn:
+        cat.id <= 3
+          ? cat.id // first row: 1,2,3
+          : cat.id === 4
+          ? 1 // second row left
+          : 3, // second row right
+    }}
+  >
               <img src={cat.img} alt={cat.name} style={styles.categoryImg} />
               <div style={styles.categoryName}>{cat.name}</div>
               <div style={styles.categoryDescription}>{cat.description}</div>
