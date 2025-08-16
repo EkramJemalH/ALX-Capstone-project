@@ -83,6 +83,7 @@ button:focus-visible {
   font-family: "Peralta", serif;
   font-weight: 400;
   font-style: normal;
+  pointer-events: none;
  }
 
 @media (max-width: 1024px) {
@@ -152,3 +153,50 @@ button:focus-visible {
     font-size: 0.9rem;
   }
 }
+/* Desktop layout: 3 top, 2 bottom with left/right alignment */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  justify-items: center;
+}
+
+.card-4 {
+  grid-column: 1; /* left */
+}
+
+.card-5 {
+  grid-column: 3; /* right */
+}
+
+/* Tablet layout: 2 + 2 + 1 */
+@media (max-width: 1024px) {
+  .category-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .card-4, .card-5 {
+    grid-column: auto; /* reset placement */
+  }
+}
+
+/* Mobile layout: 1 per row */
+/* Mobile layout: 1 per row, centered */
+@media (max-width: 768px) {
+  .category-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .card-4, .card-5 {
+    grid-column: auto;
+  }
+
+  .category-card {
+    max-width: 300px;
+    width: 100%;
+  }
+}
+
+

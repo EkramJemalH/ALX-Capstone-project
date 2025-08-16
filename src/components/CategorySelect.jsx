@@ -67,13 +67,9 @@ export default function CategorySelect() {
       textAlign: "center",
     },
     categoryGrid: {
-      display: "grid",
       width: "100%",
       maxWidth: "1000px",
       gap: "2rem",
-      gridTemplateColumns: "repeat(3, 1fr)",
-      gridTemplateRows: "auto auto",
-      justifyItems: "center",
     },
     categoryCard: {
       backgroundColor: "#76A541",
@@ -118,6 +114,7 @@ export default function CategorySelect() {
       marginTop: "0.5rem",
       padding: "0.4rem 0.6rem",
       backgroundColor: "#034527",
+      color: "white",
       border: "none",
       borderRadius: "4px",
       cursor: "pointer",
@@ -134,35 +131,27 @@ export default function CategorySelect() {
       <main style={styles.main}>
         <h1 style={styles.heading}>Quiz Categories</h1>
 
-        <div style={styles.categoryGrid}>
-          {categories.map((cat, index) => {
-            // Determine grid position for second row
-            let gridColumn = undefined;
-            if (index >= 3) {
-              gridColumn = index === 3 ? 1 : 3; // left-center and right-center
-            }
-
-            return (
-              <div key={cat.id} style={{ ...styles.categoryCard, gridColumn }}>
-                <img src={cat.img} alt={cat.name} style={styles.categoryImg} />
-                <div style={styles.categoryName}>{cat.name}</div>
-                <div style={styles.categoryDescription}>{cat.description}</div>
-                <select
-                  style={styles.select}
-                  value={selectedDifficulty[cat.id] || ""}
-                  onChange={(e) => handleDifficultyChange(cat.id, e.target.value)}
-                >
-                  <option value="">Difficulty level</option>
-                  <option value="easy">Easy</option>
-                  <option value="medium">Medium</option>
-                  <option value="hard">Hard</option>
-                </select>
-                <button style={styles.startBtn} onClick={() => startQuiz(cat.id)}>
-                  Start
-                </button>
-              </div>
-            );
-          })}
+        <div style={styles.categoryGrid} className="category-grid">
+          {categories.map((cat, index) => (
+            <div key={cat.id} className={`category-card card-${index + 1}`} style={styles.categoryCard}>
+              <img src={cat.img} alt={cat.name} style={styles.categoryImg} />
+              <div style={styles.categoryName}>{cat.name}</div>
+              <div style={styles.categoryDescription}>{cat.description}</div>
+              <select
+                style={styles.select}
+                value={selectedDifficulty[cat.id] || ""}
+                onChange={(e) => handleDifficultyChange(cat.id, e.target.value)}
+              >
+                <option value="">Difficulty level</option>
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+              </select>
+              <button style={styles.startBtn} onClick={() => startQuiz(cat.id)}>
+                Start
+              </button>
+            </div>
+          ))}
         </div>
       </main>
     </div>
