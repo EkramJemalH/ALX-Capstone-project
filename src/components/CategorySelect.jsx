@@ -11,25 +11,27 @@ export default function CategorySelect() {
   const [selectedDifficulty, setSelectedDifficulty] = useState({});
 
   const categories = [
-    { id: 1, name: "General Knowledge", description: "Fun facts, common knowledge, and everyday trivia.", img: generalKnowledgeImg },
-    { id: 2, name: "History", description: "Questions about historical events, figures, and timelines.", img: historyImg },
-    { id: 3, name: "Geography", description: "Questions about countries, capitals, landmarks, and maps.", img: geographyImg },
-    { id: 4, name: "Science and Nature", description: "Covers biology, chemistry, physics, space, and natural phenomena.", img: scienceAndNatureImg },
-    { id: 5, name: "Entertainment: Film", description: "Movie trivia from classics to modern films.", img: entertainmentImg },
+    { id: 9, name: "General Knowledge", description: "Fun facts, common knowledge, and everyday trivia.", img: generalKnowledgeImg },
+    { id: 23, name: "History", description: "Questions about historical events, figures, and timelines.", img: historyImg },
+    { id: 22, name: "Geography", description: "Questions about countries, capitals, landmarks, and maps.", img: geographyImg },
+    { id: 17, name: "Science and Nature", description: "Covers biology, chemistry, physics, space, and natural phenomena.", img: scienceAndNatureImg },
+    { id: 11, name: "Entertainment: Film", description: "Movie trivia from classics to modern films.", img: entertainmentImg },
   ];
 
   const handleDifficultyChange = (categoryId, value) => {
     setSelectedDifficulty(prev => ({ ...prev, [categoryId]: value }));
   };
+const startQuiz = (categoryId) => {
+  const difficulty = selectedDifficulty[categoryId];
+  if (!difficulty) {
+    alert("Please select a difficulty level first!");
+    return;
+  }
+  localStorage.removeItem("quizCategory");
+  localStorage.removeItem("quizDifficulty");
 
-  const startQuiz = (categoryId) => {
-    const difficulty = selectedDifficulty[categoryId];
-    if (!difficulty) {
-      alert("Please select a difficulty level first!");
-      return;
-    }
-    navigate("/quiz", { state: { categoryId, difficulty } });
-  };
+  navigate("/quiz", { state: { categoryId, difficulty } });
+};
 
   const styles = {
     container: {
