@@ -64,11 +64,10 @@ export default function Home() {
       border: "none",
       padding: "0.75rem 2rem",
       fontSize: "1rem",
-      fontWeight: "600",
+      fontWeight: "400",
       borderRadius: "0.375rem",
       cursor: "pointer",
       fontFamily: "'Ribeye', serif",
-  fontWeight: "400",
   fontStyle: "normal",
     },
     questionMark: {
@@ -85,8 +84,9 @@ export default function Home() {
   };
 
   function handleStart() {
-    navigate("/category");
-  }
+  navigate("/category-select"); // all lowercase to match the route
+}
+
 
   return (
     <div style={styles.container}>
