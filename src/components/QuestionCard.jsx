@@ -26,49 +26,21 @@ export default function QuestionCard({ question, handleAnswer, isLastQuestion, o
   };
 
   return (
-    <div
-      style={{
-        backgroundColor: "rgba(224, 224, 224, 0.9)", // light gray + transparency
-        borderRadius: "8px",
-        padding: "2rem",
-        maxWidth: "600px",
-        width: "100%",
-        textAlign: "center",
-        boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
-        backdropFilter: "blur(5px)", // optional blur for better see-through effect
-      }}
-    >
+    <div className="question-card">
       {/* Category */}
-      <h2 style={{ marginBottom: "1rem", color: "#034527", fontWeight: "700" , fontFamily: "'Ribeye', serif" , fontSize:"2rem"}}>
-        {decodeHTML(question.category)}
-      </h2>
+      <h2 className="question-category">{decodeHTML(question.category)}</h2>
 
       {/* Question */}
-      <h3 style={{ marginBottom: "0.95rem", color: "#034527" }}>{decodeHTML(question.question)}</h3>
+      <h3 className="question-text">{decodeHTML(question.question)}</h3>
 
-      {/* Answers (2x2 grid) */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: "1rem",
-          marginBottom: "1.5rem",
-        }}
-      >
+      {/* Answers */}
+      <div className="answer-container">
         {answers.map((answer, idx) => (
           <button
             key={idx}
+            className={`answer-btn ${selectedAnswer === answer ? "selected" : ""}`}
             onClick={() => handleSelect(answer)}
             disabled={selectedAnswer !== null}
-            style={{
-              padding: "0.5rem",
-              borderRadius: "6px",
-              border: selectedAnswer === answer ? "2px solid #FDF140" : "1px solid #FDF140",
-              backgroundColor: selectedAnswer === answer ? "#76A541" : "#fff",
-              color: selectedAnswer === answer ? "#fff" : "#413a3aff",
-              cursor: selectedAnswer ? "default" : "pointer",
-              fontWeight: "600",
-            }}
           >
             {decodeHTML(answer)}
           </button>
@@ -77,17 +49,9 @@ export default function QuestionCard({ question, handleAnswer, isLastQuestion, o
 
       {/* Next / Submit Button */}
       <button
+        className="next-btn"
         onClick={onNext}
         disabled={selectedAnswer === null}
-        style={{
-          padding: "0.5rem 1rem",
-          backgroundColor: "#034527",
-          color: "#fff",
-          border: "none",
-          fontWeight:"700",
-          borderRadius: "4px",
-          cursor: selectedAnswer === null ? "not-allowed" : "pointer",
-        }}
       >
         {isLastQuestion ? "Submit" : "Next"}
       </button>
