@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import QuestionCard from "./QuestionCard";
+import Loader from "./Loader";
+import Error from "./Error";
+
 
 export default function Quiz() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Get category & difficulty from state or fallback to localStorage
   let { categoryId, difficulty } = location.state || {};
   if (!categoryId || !difficulty) {
     categoryId = localStorage.getItem("quizCategory");
@@ -71,21 +73,11 @@ export default function Quiz() {
   };
 
   if (loading) {
-    return <div style={{ color: "#fff" }}>Loading questions...</div>;
+    return <Loader />;
   }
 
   if (error) {
-    return (
-      <div style={{ color: "#fff", textAlign: "center" }}>
-        {error}
-        <button
-          onClick={restartQuiz}
-          style={{ marginTop: "1rem", padding: "0.5rem 1rem" }}
-        >
-          Retry
-        </button>
-      </div>
-    );
+    return <Error message={error} onRetry={restartQuiz} />;
   }
 
   if (!questions.length) {
