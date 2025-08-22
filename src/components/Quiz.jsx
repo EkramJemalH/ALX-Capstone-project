@@ -91,18 +91,37 @@ export default function Quiz() {
     );
   }
 
+ 
   return (
     <div
       style={{
-        padding: "2rem",
+        paddingTop: "1rem", // space from top
+    paddingLeft: "0",   // remove left padding
+    paddingRight: "0",
         minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "center",
         alignItems: "center",
         backgroundColor: "#76A541",
       }}
     >
+      {/* Top-left nav-style header */}
+     <div style={{ width: "100%" }}>
+        <div
+          style={{
+            backgroundColor: "#76A541",
+            color: "white",
+            padding: "0.5rem 1rem",
+            fontSize: "1.5rem",
+            fontWeight: "400",
+            fontFamily: "'Protest Revolution', sans-serif",
+            borderBottom: "2px solid #FDF140",
+            textAlign: "left",
+          }}
+        >
+          Quizzy
+        </div>
+      </div>
       <QuestionCard
         question={questions[currentIndex]}
         handleAnswer={handleAnswer}
