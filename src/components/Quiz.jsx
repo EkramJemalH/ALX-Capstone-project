@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import QuestionCard from "./QuestionCard";
 import Loader from "./Loader";
 import Error from "./Error";
+import Result from "./Result"; // ✅ import Result
 
 export default function Quiz() {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ export default function Quiz() {
   const [score, setScore] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [showResult, setShowResult] = useState(false); // ✅ new state
 
   const fetchQuestions = async () => {
     setLoading(true);
@@ -64,6 +66,7 @@ export default function Quiz() {
   const restartQuiz = () => {
     setCurrentIndex(0);
     setScore(0);
+    setShowResult(false); // reset to quiz
     fetchQuestions();
   };
 
@@ -71,6 +74,22 @@ export default function Quiz() {
   if (error) return <Error message={error} onRetry={restartQuiz} />;
   if (!questions.length)
     return <Error message="No questions to display." onRetry={restartQuiz} />;
+
+  // ✅ Show result page
+  if (showResult) {
+    return (
+      <Result
+        score={score}
+        totalQuestions={questions.length}
+        onPlayAgain={restartQuiz}
+        onReturnHome={() => {
+          localStorage.removeItem("quizCategory");
+          localStorage.removeItem("quizDifficulty");
+          navigate("/"); // back to home
+        }}
+      />
+    );
+  }
 
   return (
     <div
@@ -92,30 +111,10 @@ export default function Quiz() {
           if (currentIndex + 1 < questions.length) {
             setCurrentIndex((prev) => prev + 1);
           } else {
-            alert(`Quiz finished! Your score: ${score} / ${questions.length}`);
-            localStorage.removeItem("quizCategory");
-            localStorage.removeItem("quizDifficulty");
-            navigate("/category-select");
+            setShowResult(true); // ✅ switch to result page
           }
         }}
       />
-
-      {currentIndex + 1 === questions.length && (
-        <button
-          onClick={restartQuiz}
-          style={{
-            marginTop: "2rem",
-            padding: "0.5rem 1rem",
-            backgroundColor: "#034527",
-            color: "#fff",
-            border: "none",
-            borderRadius: "4px",
-            cursor: "pointer",
-          }}
-        >
-          Restart Quiz
-        </button>
-      )}
     </div>
   );
 }
