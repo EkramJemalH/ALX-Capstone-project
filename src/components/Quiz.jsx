@@ -4,7 +4,6 @@ import QuestionCard from "./QuestionCard";
 import Loader from "./Loader";
 import Error from "./Error";
 
-
 export default function Quiz() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -51,19 +50,15 @@ export default function Quiz() {
       return;
     }
 
-    // Save current quiz selection
     localStorage.setItem("quizCategory", categoryId);
     localStorage.setItem("quizDifficulty", difficulty);
 
     fetchQuestions();
   }, [categoryId, difficulty, navigate]);
 
+  // ✅ only update score here
   const handleAnswer = (isCorrect) => {
     if (isCorrect) setScore((prev) => prev + 1);
-
-    if (currentIndex + 1 < questions.length) {
-      setCurrentIndex((prev) => prev + 1);
-    }
   };
 
   const restartQuiz = () => {
@@ -72,27 +67,10 @@ export default function Quiz() {
     fetchQuestions();
   };
 
-  if (loading) {
-    return <Loader />;
-  }
-
-  if (error) {
-    return <Error message={error} onRetry={restartQuiz} />;
-  }
-
-  if (!questions.length) {
-    return (
-      <div style={{ color: "#fff", textAlign: "center" }}>
-        No questions to display.
-        <button
-          onClick={restartQuiz}
-          style={{ marginTop: "1rem", padding: "0.5rem 1rem" }}
-        >
-          Retry Quiz
-        </button>
-      </div>
-    );
-  }
+  if (loading) return <Loader />;
+  if (error) return <Error message={error} onRetry={restartQuiz} />;
+  if (!questions.length)
+    return <Error message="No questions to display." onRetry={restartQuiz} />;
 
   return (
     <div
@@ -107,20 +85,20 @@ export default function Quiz() {
       }}
     >
       <QuestionCard
-  question={questions[currentIndex]}
-  handleAnswer={handleAnswer}
-  isLastQuestion={currentIndex + 1 === questions.length}
-  onNext={() => {
-    if (currentIndex + 1 < questions.length) {
-      setCurrentIndex((prev) => prev + 1);
-    } else {
-      alert(`Quiz finished! Your score: ${score} / ${questions.length}`);
-      localStorage.removeItem("quizCategory");
-      localStorage.removeItem("quizDifficulty");
-      navigate("/category-select");
-    }
-  }}
-/>
+        question={questions[currentIndex]}
+        handleAnswer={handleAnswer}
+        isLastQuestion={currentIndex + 1 === questions.length}
+        onNext={() => {
+          if (currentIndex + 1 < questions.length) {
+            setCurrentIndex((prev) => prev + 1);
+          } else {
+            alert(`Quiz finished! Your score: ${score} / ${questions.length}`);
+            localStorage.removeItem("quizCategory");
+            localStorage.removeItem("quizDifficulty");
+            navigate("/category-select");
+          }
+        }}
+      />
 
       {currentIndex + 1 === questions.length && (
         <button
