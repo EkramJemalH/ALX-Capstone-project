@@ -6,7 +6,7 @@ export default function Error({ message = "Something went wrong!", onRetry }) {
         justifyContent: "center",
         alignItems: "center",
         minHeight: "100vh",
-        backgroundColor: "#fff4f4", // light red background
+        backgroundColor: "#fff4f4", 
       }}
     >
       <div
@@ -16,14 +16,14 @@ export default function Error({ message = "Something went wrong!", onRetry }) {
           padding: "2rem",
           borderRadius: "12px",
           boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
-          border: "2px solid #f87171", // red border
+          border: "2px solid #f87171", 
         }}
       >
         <h2
           style={{
             fontSize: "1.5rem",
             fontWeight: "bold",
-            color: "#dc2626", // red
+            color: "#dc2626", 
             marginBottom: "1rem",
           }}
         >
@@ -31,7 +31,7 @@ export default function Error({ message = "Something went wrong!", onRetry }) {
         </h2>
         <p
           style={{
-            color: "#374151", // dark gray
+            color: "#374151", 
             marginBottom: "1.5rem",
           }}
         >
@@ -42,7 +42,7 @@ export default function Error({ message = "Something went wrong!", onRetry }) {
             onClick={onRetry}
             style={{
               padding: "0.5rem 1rem",
-              backgroundColor: "#034527", // blue
+              backgroundColor: "#034527", 
               color: "white",
               border: "none",
               borderRadius: "8px",

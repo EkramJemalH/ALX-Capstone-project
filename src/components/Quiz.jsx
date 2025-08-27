@@ -95,8 +95,8 @@ export default function Quiz() {
   return (
     <div
       style={{
-        paddingTop: "1rem", // space from top
-    paddingLeft: "0",   // remove left padding
+        paddingTop: "1rem", 
+    paddingLeft: "0",   
     paddingRight: "0",
         minHeight: "100vh",
         display: "flex",
@@ -105,7 +105,7 @@ export default function Quiz() {
         backgroundColor: "#76A541",
       }}
     >
-      {/* Top-left nav-style header */}
+      
      <div style={{ width: "100%" }}>
         <div
           style={{
@@ -130,7 +130,7 @@ export default function Quiz() {
           if (currentIndex + 1 < questions.length) {
             setCurrentIndex((prev) => prev + 1);
           } else {
-            setShowResult(true); // ✅ switch to result page
+            setShowResult(true); // switch to result page
           }
         }}
       />
