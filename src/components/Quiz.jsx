@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import QuestionCard from "./QuestionCard";
 import Loader from "./Loader";
 import Error from "./Error";
-import Result from "./Result"; // ✅ import Result
+import Result from "./Result"; 
 
 export default function Quiz() {
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ export default function Quiz() {
   const [score, setScore] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [showResult, setShowResult] = useState(false); // ✅ new state
+  const [showResult, setShowResult] = useState(false); 
 
   const fetchQuestions = async () => {
     setLoading(true);
@@ -66,7 +66,7 @@ export default function Quiz() {
   const restartQuiz = () => {
     setCurrentIndex(0);
     setScore(0);
-    setShowResult(false); // reset to quiz
+    setShowResult(false); 
     fetchQuestions();
   };
 
@@ -75,7 +75,7 @@ export default function Quiz() {
   if (!questions.length)
     return <Error message="No questions to display." onRetry={restartQuiz} />;
 
-  // ✅ Show result page
+ 
   if (showResult) {
     return (
       <Result
@@ -130,7 +130,7 @@ export default function Quiz() {
           if (currentIndex + 1 < questions.length) {
             setCurrentIndex((prev) => prev + 1);
           } else {
-            setShowResult(true); // switch to result page
+            setShowResult(true); 
           }
         }}
       />

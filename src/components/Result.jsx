@@ -15,7 +15,7 @@ const Result = ({ score, totalQuestions, onPlayAgain, onReturnHome }) => {
     : `Oh no, You got ${score} out of ${totalQuestions}!\nDon't give up! Try again and improve!`;
 
   const isMobile = windowWidth < 768; // tablet or mobile
-  const flexDirection = isMobile ? "column" : "row-reverse"; // card + question mark
+  const flexDirection = isMobile ? "column" : "row-reverse"; 
 
   return (
     <div

@@ -10,7 +10,7 @@ export default function QuestionCard({ question, handleAnswer, isLastQuestion, o
         () => Math.random() - 0.5
       );
       setAnswers(shuffled);
-      setSelectedAnswer(null); // reset selection for new question
+      setSelectedAnswer(null); 
     }
   }, [question]);
 
@@ -47,7 +47,7 @@ export default function QuestionCard({ question, handleAnswer, isLastQuestion, o
         ))}
       </div>
 
-      {/* Next / Submit Button */}
+      
       <button
         className="next-btn"
         onClick={onNext}
