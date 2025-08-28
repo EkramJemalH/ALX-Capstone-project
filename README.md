@@ -95,7 +95,7 @@ You can find the design files here:  https://www.figma.com/design/OlPCvSQWf3GbdN
 
 ## Live Demo
 
-Check out the live app here: [Quiz App Live](https://capable-beignet-d17aee.netlify.app/)
+Check out the live app here: [Quiz App Live](https://quiz-app-quizzy.netlify.app/)
 
 
 
