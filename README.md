@@ -93,6 +93,9 @@ The design for this Quiz App was created to ensure a clean, user-friendly experi
 
 You can find the design files here:  https://www.figma.com/design/OlPCvSQWf3GbdNaz01dj8J/Capstone-project-desgin?m=auto&t=cWvfwiLqIvFoDmzT-6
 
+## Live Demo
+
+Check out the live app here: [Quiz App Live](https://capable-beignet-d17aee.netlify.app/)
 
 
 

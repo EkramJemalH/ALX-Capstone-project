@@ -84,7 +84,7 @@ export default function Home() {
   };
 
   function handleStart() {
-  navigate("/category-select"); // all lowercase to match the route
+  navigate("/category-select"); 
 }
 
 
